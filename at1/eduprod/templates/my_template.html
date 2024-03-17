@@ -1,0 +1,50 @@
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Recent Deck</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+</head>
+<body>
+    <h1>Recent Deck Content</h1>
+    <div id="recent_deck_content">
+        <!-- Recent deck content will be displayed here -->
+    </div>
+    
+    <form id="data_form">
+        {% csrf_token %}
+        <label for="name">Enter Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+    // Handle form submission using AJAX
+    $('#data_form').submit(function(event) {
+        event.preventDefault();  // Prevent default form submission behavior
+        
+        var formData = $(this).serialize();  // Serialize form data
+        
+        // Send form data to the server using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{% url "process_data" %}',
+            data: formData,
+            success: function(response) {
+                // Update recent deck content
+                $('#recent_deck_content').html(response.recent_deck_content);
+            },
+            error: function(xhr, errmsg, err) {
+                // Handle errors
+                console.log(xhr.status + ": " + xhr.responseText);  // Log error message
+            }
+        });
+    });
+    </script>
+</body>
+</html>
+
+{% endblock %}
