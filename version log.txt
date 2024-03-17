@@ -1,0 +1,5 @@
+0.1:
+Connecting GitHub folder
+0.2:
+Added Django
+Added version log
