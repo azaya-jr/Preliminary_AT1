@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # views.py
 
 import os
@@ -37,3 +38,8 @@ def process_data(request):
             return JsonResponse({'error': 'Name not provided.'}, status=400)
     else:
         return JsonResponse({'error': 'Method not allowed.'}, status=405)
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 2eee140718b1c819aa6ae0d5603d24e5832a70fd

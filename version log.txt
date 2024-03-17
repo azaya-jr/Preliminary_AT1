@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 0.1:
 Connecting GitHub folder
 0.2:
 Added Django
+=======
+0.1:
+Connecting GitHub folder
+0.2:
+Added Django
+>>>>>>> 2eee140718b1c819aa6ae0d5603d24e5832a70fd
 Added version log
