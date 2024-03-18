@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 ASGI config for at1 project.
 
@@ -15,21 +14,3 @@ from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'at1.settings')
 
 application = get_asgi_application()
-=======
-"""
-ASGI config for at1 project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
-"""
-
-import os
-
-from django.core.asgi import get_asgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'at1.settings')
-
-application = get_asgi_application()
->>>>>>> 2eee140718b1c819aa6ae0d5603d24e5832a70fd

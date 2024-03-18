@@ -1,12 +1,21 @@
-<<<<<<< HEAD
 0.1:
 Connecting GitHub folder
 0.2:
 Added Django
-=======
 0.1:
 Connecting GitHub folder
 0.2:
 Added Django
->>>>>>> 2eee140718b1c819aa6ae0d5603d24e5832a70fd
 Added version log
+0.3
+Fixed version log
+0.4:
+Installed Eduprod and added basic correspondence between user and deck
+0.5:
+Installed signup system to create user
+Fixed correspondence in eduprod between user and deck
+Installed login
+Installed builder
+Installed hub
+
+TODO: Fix Builder to run server
