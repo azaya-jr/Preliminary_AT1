@@ -1,8 +1,9 @@
-# urls.py
-
 from django.urls import path
-from .views import index  # Import the index view
+from .views import login
 
 urlpatterns = [
-    path('', index, name='index'),  # Map the index view to the root URL
+    path('login/', login, name='login'),
+    # Remove the duplicate pattern below if it exists
+    # path('login/', login, name='login'),  
+    # Add other URL patterns as needed
 ]

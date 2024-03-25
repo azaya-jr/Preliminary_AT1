@@ -17,5 +17,12 @@ Fixed correspondence in eduprod between user and deck
 Installed login
 Installed builder
 Installed hub
+0.6:
+Basic functionality of roulette added (broken)
+0.7:
+Roulette app created
+Roulette functionality moved
 
-TODO: Fix Builder to run server
+TODO:
+Fix Builder
+Tested switching decks

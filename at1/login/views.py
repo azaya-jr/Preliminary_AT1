@@ -1,35 +1,37 @@
 import os
-from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.shortcuts import render
+from django.http import HttpResponse
 
-def index(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        # Check if the username directory already exists
-        user_folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', 'Local', username)
-        if os.path.exists(user_folder_path):
-            # If the folder already exists, return an error
-            messages.error(request, 'Folder with this username already exists.')
-            return redirect('signup')  # Adjust the URL name if necessary
+        
+        # Check if the username matches a folder name
+        user_folder = os.path.join('C:\\Users\\azaya\\Preliminary_AT1\\Local', username)
+        if os.path.exists(user_folder):
+            # Check if the password matches
+            password_file = os.path.join(user_folder, 'Private', 'psd.txt')
+            if os.path.exists(password_file):
+                with open(password_file, 'r') as f:
+                    stored_password = f.read().strip()
+                if password == stored_password:
+                    # Write '0' to login.txt
+                    login_flag_file = os.path.join(user_folder, 'Private', 'login.txt')
+                    with open(login_flag_file, 'w') as f:
+                        f.write('0')
+
+                    # Change currentlog.txt to the username
+                    current_log_file = os.path.join('C:\\Users\\azaya\\Preliminary_AT1\\at1\\Local', 'currentlog.txt')
+                    with open(current_log_file, 'w') as f:
+                        f.write(username)
+                    
+                    return HttpResponse(f'Welcome, {username}!')
+                else:
+                    return HttpResponse('Error: Incorrect password!')
+            else:
+                return HttpResponse('Error: Password file not found!')
         else:
-            # Create the user directory
-            os.makedirs(user_folder_path)
-            # Create subdirectories and files
-            os.makedirs(os.path.join(user_folder_path, 'History'))
-            os.makedirs(os.path.join(user_folder_path, 'Private'))
-            os.makedirs(os.path.join(user_folder_path, 'RecDeck'))
-            # Create files inside the Private folder
-            with open(os.path.join(user_folder_path, 'Private', 'ysr.txt'), 'w') as ysr_file:
-                ysr_file.write(username)
-            with open(os.path.join(user_folder_path, 'Private', 'psd.txt'), 'w') as psd_file:
-                psd_file.write(password)
-            with open(os.path.join(user_folder_path, 'Private', 'login.txt'), 'w') as psd_file:
-                psd_file.write
-            # Create RecentDeck.txt inside the RecDeck folder
-            open(os.path.join(user_folder_path, 'RecDeck', 'RecentDeck.txt'), 'a').close()
-            # Create login.txt in the same directory as RecDeck, Pri    vate, and History
-            messages.success(request, 'Folder created successfully.')
-            return redirect('signup')  # Adjust the URL name if necessary
+            return HttpResponse('Error: Username not found!')
     else:
-        return render(request, 'signup.html')
+        return render(request, 'login.html')
