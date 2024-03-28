@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from login.views import login 
+from roulette import views 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('eduprod/', include('eduprod.urls')),
     path('login/', login, name='login'),
     path('signup/', include('signup.urls')),
     path('hub/', include('hub.urls')),
+    path('roulette/', views.flash_card_roulette, name='flash_card_roulette'),
     #path('builder/', include('builder.urls')),
 ]
