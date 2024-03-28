@@ -22,7 +22,26 @@ Basic functionality of roulette added (broken)
 0.7:
 Roulette app created
 Roulette functionality moved
+0.8:
+Roulette activated
+0.9:
+Roulette fully working
 
-TODO:
-Fix Builder
-Tested switching decks
+
+1.0:
+Builder fixed.
+***Beta version (functional. only minor bugs)***
+Features:
+Logging in
+Signing up
+Data of multiple users can be stored
+Choose deck directory
+Use flash card roulette with any deck thathas correct file system
+Can create deck (automatically in correct file system)
+Can add questions to deck
+Can share decks
+
+Coming features:
+Track Progress of different users/create a report
+Proper UI
+Bug fixes

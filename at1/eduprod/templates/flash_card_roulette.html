@@ -1,3 +1,4 @@
+<!-- i have no clue why this is in eduprod, but it works --> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,26 +14,25 @@
             <p>{{ random_q_file_content }}</p>
         </div>
         <div>
-            <button id="reveal-answer-btn">Reveal Answer</button>
-            <button id="next-question-btn">Next Question</button>
-        </div>
-        <div id="answer-section" style="display: none;">
-            <h2>Answer:</h2>
-            <p id="answer"></p>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById("reveal-answer-btn").addEventListener("click", function() {
-            document.getElementById("answer").innerText = "{{ corresponding_file_content }}";
-            document.getElementById("answer-section").style.display = "block";
-        });
-
-        document.getElementById("next-question-btn").addEventListener("click", function() {
-            // You can redirect to another URL or perform an AJAX request to fetch the next question
-            // For simplicity, let's just reload the page for now
-            window.location.reload();
-        });
-    </script>
-</body>
-</html>
+            <div id="buttons">
+                <button id="reveal-answer-btn">Reveal Answer</button>
+                <button id="next-question-btn" style="display: none;">Next Question</button>
+            </div>
+            <div id="answer-section" style="display: none;">
+                <h2>Answer:</h2>
+                <p id="answer"></p>
+            </div>
+            
+            <script>
+                document.getElementById("reveal-answer-btn").addEventListener("click", function() {
+                    document.getElementById("answer").innerText = "{{ corresponding_file_content }}";
+                    document.getElementById("answer-section").style.display = "block";
+                    document.getElementById("next-question-btn").style.display = "block"; // Show next question button
+                });
+            
+                document.getElementById("next-question-btn").addEventListener("click", function() {
+                    // You can redirect to another URL or perform an AJAX request to fetch the next question
+                    // For simplicity, let's just reload the page for now
+                    window.location.reload();
+                });
+            </script>

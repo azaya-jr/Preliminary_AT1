@@ -25,5 +25,5 @@ urlpatterns = [
     path('signup/', include('signup.urls')),
     path('hub/', include('hub.urls')),
     path('roulette/', views.flash_card_roulette, name='flash_card_roulette'),
-    #path('builder/', include('builder.urls')),
+    path('builder/', include('builder.urls')),
 ]

@@ -26,11 +26,16 @@ def flash_card_roulette(request):
     
     current_directory = os.path.dirname(os.path.abspath(__file__))
     currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
-    
+    if currentlog_path is None:
+        return HttpResponse("Error: You are not logged in.")
+    if current_directory is None:
+        return HttpResponse("Error: You are not logged in.")
     with open(currentlog_path, 'r') as currentlog_file:
         user_subdirectory = currentlog_file.read().strip()
-    
+    lpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History'))
     dpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/RecentDeck.txt'))
+    if not os.path.exists(dpath):
+        return HttpResponse("Error: You are not logged in.")
     print("dpath:", dpath)  # Add print statement to check dpath
 
     with open(dpath, 'r') as file:

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Deck</title>
+</head>
+<body>
+    <h1>Create Deck</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ name_form.as_p }}
+        {{ author_form.as_p }}
+        <button type="submit">Create Deck</button>
+    </form>
+
+    <h2>Add Question and Answer</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+        {{ answer_form.as_p }}
+        <button type="submit">Add Question and Answer</button>
+    </form>
+</body>
+</html>
