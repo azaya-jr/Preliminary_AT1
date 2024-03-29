@@ -41,6 +41,13 @@ def process_data(request):
             with open(file_path, 'r') as file:
                 recent_deck_content = file.read()
             # Return JSON response with recent deck content
+            os.makedirs(recent_deck_content)
+            if os.path.exists(recent_deck_content):
+             print("Deck found")
+            else:
+             print("Deck created")
+            os.makedirs(os.path.join(recent_deck_content, 'Q'))
+            os.makedirs(os.path.join(recent_deck_content, 'A'))
             return JsonResponse({'recent_deck_content': recent_deck_content})
         else:
             return JsonResponse({'error': 'Name not provided.'}, status=400)

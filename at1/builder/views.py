@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .forms import NameForm, AuthorForm, QuestionForm, AnswerForm
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,19 +9,31 @@ USER_DECKS_DIR = os.path.join(BASE_DIR, 'Local', 'My_Decks')
 def create_deck_folder(name):
     deck_path = os.path.join(USER_DECKS_DIR, name)
     os.makedirs(deck_path)
-    os.makedirs(os.path.join(deck_path, 'I'))
     os.makedirs(os.path.join(deck_path, 'Q'))
     os.makedirs(os.path.join(deck_path, 'A'))
 
-def save_author(name, author):
-    deck_path = os.path.join(USER_DECKS_DIR, name)
-    with open(os.path.join(deck_path, 'I', 'author.txt'), 'w') as file:
-        file.write(author)
 
 def save_question_and_answer(name, question, answer):
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
+    if currentlog_path is None:
+        return HttpResponse("Error: You are not logged in.")
+    if current_directory is None:
+        return HttpResponse("Error: You are not logged in.")
+    with open(currentlog_path, 'r') as currentlog_file:
+        user_subdirectory = currentlog_file.read().strip()
+    lpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History'))
+    dpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/RecentDeck.txt'))
+    if not os.path.exists(dpath):
+        return HttpResponse("Error: You are not logged in.")
+    with open(dpath, 'r') as file:
+        directory_name = file.read().strip()
+    print("directory_name:", directory_name) 
+    cpath = os.path.join(os.path.dirname(__file__), '..', 'Local', directory_name) 
+    print("dpath:", dpath)  # Add print statement to check dpath
     deck_path = os.path.join(USER_DECKS_DIR, name)
-    q_folder = os.path.join(deck_path, 'Q')
-    a_folder = os.path.join(deck_path, 'A')
+    q_folder = os.path.join(cpath, 'Q')
+    a_folder = os.path.join(cpath, 'A')
     num_questions = len(os.listdir(q_folder))
     question_file = os.path.join(q_folder, f'{num_questions + 1}.txt')
     answer_file = os.path.join(a_folder, f'{num_questions + 1}.txt')
