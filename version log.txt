@@ -26,12 +26,8 @@ Roulette functionality moved
 Roulette activated
 0.9:
 Roulette fully working
-
-
 1.0:
-Builder fixed.
-***Beta version (functional. only minor bugs)***
-Features:
+Beta Released
 Logging in
 Signing up
 Data of multiple users can be stored
@@ -40,6 +36,14 @@ Use flash card roulette with any deck thathas correct file system
 Can create deck (automatically in correct file system)
 Can add questions to deck
 Can share decks
+1.1:
+Building deck is now done with changing deck directory in Eduprod
+Questions still added with Builder
+Deck will not create if a folder already exists
+Fixed creating deck bug in Builder (now void)
+1.2:
+In process of making sure no old data is written without giving a headsup
+
 
 Coming features:
 Track Progress of different users/create a report

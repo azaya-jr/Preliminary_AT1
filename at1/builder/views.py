@@ -65,7 +65,7 @@ def create_deck(request):
             answer = answer_form.cleaned_data['answer']
             save_question_and_answer(name, question, answer)
             return HttpResponseRedirect(request.path)  # Redirect to the same page to allow adding more questions
-
+#idk
     else:
         name_form = NameForm()
         author_form = AuthorForm()

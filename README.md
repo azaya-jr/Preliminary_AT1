@@ -22,6 +22,10 @@ Questions still added with Builder
 Deck will not create if a folder already exists
 Fixed creating deck bug in Builder (now void)
 
+# Beta Version 1.2:
+
+Now identifies if two decks have the same name
+
 ## Coming features:
 Track Progress of different users/create a report
 Proper UI
