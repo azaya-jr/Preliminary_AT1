@@ -23,7 +23,7 @@ Flash Card System.
 - Fixed creating deck bug in Builder (now void)
 
 ## Coming features:
-Track Progress of different users/create a report
-Proper UI
-Bug fixes
+- Track Progress of different users/create a report
+- Proper UI
+- Bug fixes
 
