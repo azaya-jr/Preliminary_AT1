@@ -34,6 +34,7 @@ def signup(request):
                 psd_file.write
             # Create RecentDeck.txt inside the RecDeck folder
             open(os.path.join(user_folder_path, 'RecDeck', 'RecentDeck.txt'), 'a').close()
+            open(os.path.join(user_folder_path, 'RecDeck', 'cq.txt'), 'a').close()
             # Create login.txt in the same directory as RecDeck, Pri    vate, and History
             messages.success(request, 'Folder created successfully.')
             return redirect('signup')  # Adjust the URL name if necessary

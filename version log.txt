@@ -32,7 +32,7 @@ Logging in
 Signing up
 Data of multiple users can be stored
 Choose deck directory
-Use flash card roulette with any deck thathas correct file system
+Use flash card roulette with any deck that has correct file system
 Can create deck (automatically in correct file system)
 Can add questions to deck
 Can share decks
@@ -46,9 +46,12 @@ In process of making sure no old data is written without giving a headsup
 1.3:
 History now logged
 Old data is now completely overwritten and History files are all flushed
-
+1.4:
+Can view most recent deck history in History
+(lists correct and incorrect questions and how many times each one was correct/incorrect)
 
 Coming features:
-Track Progress of different users/create a report
-Proper UI
+Proper GUI
 Bug fixes
+Quality of life features
+Log out option

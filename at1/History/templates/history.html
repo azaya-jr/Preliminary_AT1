@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+</head>
+<body>
+    <h1>History</h1>
+    <h2>Deck Location:</h2>
+    <p>{{ history_data }}</p>
+
+    <h2>Questions You Got Correct</h2>
+    <ul>
+        {% for string, count in cline_counts.items %}
+        <li>{{ string }} - {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Questions You Got Incorrect</h2>
+    <ul>
+        {% for string, count in wline_counts.items %}
+        <li>{{ string }} - {{ count }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

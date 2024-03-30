@@ -127,11 +127,42 @@ def handle_action(request):
         # Handle other HTTP methods (e.g., GET)
         return JsonResponse({'error': 'Method not allowed.'}, status=405)
     
-    
-    
-    
 import os
 from django.http import HttpResponse
+
+def handle_answer(request, answer):
+    if request.method == 'GET':
+        current_directory = os.path.dirname(os.path.abspath(__file__))  # Define current_directory here
+        log_file_path = os.path.join(current_directory, '..', 'Local', 'currentlog.txt')
+        log = get_file_contents(log_file_path)
+        if log is None:
+            return HttpResponse("Error: Unable to locate log file.")
+
+        # Define user_subdirectory here
+        currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
+        with open(currentlog_path, 'r') as currentlog_file:
+            user_subdirectory = currentlog_file.read().strip()
+
+        # Define cqpath, cline_path, and wline_path here
+        cqpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/cq.txt'))
+        cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
+        wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
+
+        with open(cqpath, 'r') as file:
+            random_q_file = file.read().strip()
+
+        if random_q_file is None:
+            return HttpResponse("Error: Random question file not found in session.")
+
+        # Write to cline.txt or wline.txt based on the answer
+        if answer == 'correct':
+            with open(cline_path, 'a') as cline_file:
+                cline_file.write(random_q_file + '\n')
+            return HttpResponse("Answer recorded as correct.")
+        elif answer == 'incorrect':
+            with open(wline_path, 'a') as wline_file:
+                wline_file.write(random_q_file + '\n')
+            return HttpResponse("Answer recorded as incorrect.")
 
 def get_file_contents(file_path):
     try:
@@ -140,36 +171,5 @@ def get_file_contents(file_path):
     except FileNotFoundError:
         return None
 
-def handle_answer(request, answer):
-    if request.method == 'GET':
-        log_file_path = os.path.join(os.path.dirname(__file__), '..', 'Local', 'currentlog.txt')
-        log = get_file_contents(log_file_path)
-        if log is None:
-            return HttpResponse("Error: Unable to locate log file.")
-
-        random_q_file = "a test"  # Placeholder, you need to retrieve this value from the session
-
-        if random_q_file is None:
-            return HttpResponse("Error: Random question file not found in session.")
-
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
-
-        with open(currentlog_path, 'r') as currentlog_file:
-            user_subdirectory = currentlog_file.read().strip()
-
-        # Set the paths for cline.txt and wline.txt
-        cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
-        wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
-
-        # Write to cline.txt if answer is correct
-        if answer == 'correct':
-            with open(cline_path, 'a') as cline_file:
-                cline_file.write(random_q_file + '\n')
-            return HttpResponse("Answer recorded as correct.")
-
-        # Write to wline.txt if answer is incorrect
-        elif answer == 'incorrect':
-            with open(wline_path, 'a') as wline_file:
-                wline_file.write(random_q_file + '\n')
-            return HttpResponse("Answer recorded as incorrect.")
+import os
+from django.http import HttpResponse

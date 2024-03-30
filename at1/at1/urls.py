@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from login.views import login 
 from roulette import views 
+from History.views import history_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('eduprod/', include('eduprod.urls')),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('hub/', include('hub.urls')),
     path('roulette/', views.flash_card_roulette, name='flash_card_roulette'),
     path('builder/', include('builder.urls')),
+    path('history/', history_view, name='history'),
 ]

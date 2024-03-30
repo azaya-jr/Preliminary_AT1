@@ -31,8 +31,12 @@ Flash Card System.
 - History is now logged under the user
 - History files now flushed when the deck is changed (or kept the same)
 
-## Coming features:
-- Track Progress of different users/create a report
-- Proper UI
-- Bug fixes
+# Beta Version 1.4:
 
+- Can view most recent deck history in History 
+    (lists correct and incorrect questions and how many times each one was correct/incorrect)
+
+## Coming features:
+- Proper GUI
+- Bug fixes
+- Quality of life features
