@@ -44,7 +44,9 @@ def my_view(request):
     else:
         # Return an error message
         return HttpResponse("Error: You are not logged in.")
-
+def delete_all_lines(file_path):
+    with open(file_path, 'w') as file:
+        file.truncate(0)
 def process_data(request):
     if request.method == 'POST':
         # Read the content of currentlog.txt
@@ -70,30 +72,21 @@ def process_data(request):
             os.makedirs(history_directory, exist_ok=True)
             current_name = extract_last_part(name)
             text_ext = ".txt"
-            realname = current_name + text_ext
+            realname = 'history' + text_ext
             md_file_name = os.path.basename(realname)
             md_file_path = os.path.join(history_directory, md_file_name)
-
             if os.path.exists(name):
                 with open(md_file_path, 'r') as file:
                     first_line = file.readline()
-                    if first_line != name:
-                        print('woah')
-                        return JsonResponse({'message': 'Continue?', 'show_modal': True})
-                    action = request.POST.get('action')
-                    if action:
-                        if action == 'yes':
-                            print("User clicked Yes.")
-                        elif action == 'no':
-                            print("User clicked No.")
-                        else: print("Invalid action received.")
-                    else: 
-                        print("Action not provided.")
-                    # You might want to handle other cases here
+                with open(md_file_path, 'w') as file:
+                    file.write(recent_deck_content)
             else:
                 with open(md_file_path, 'w') as file:
                     file.write(recent_deck_content)
-            
+            cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
+            wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
+            delete_all_lines(cline_path)
+            delete_all_lines(wline_path)
             # Create directories for Q and A
             if os.path.exists(recent_deck_content):            
                 print("Deck found")
@@ -133,3 +126,50 @@ def handle_action(request):
     else:
         # Handle other HTTP methods (e.g., GET)
         return JsonResponse({'error': 'Method not allowed.'}, status=405)
+    
+    
+    
+    
+import os
+from django.http import HttpResponse
+
+def get_file_contents(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return file.read()
+    except FileNotFoundError:
+        return None
+
+def handle_answer(request, answer):
+    if request.method == 'GET':
+        log_file_path = os.path.join(os.path.dirname(__file__), '..', 'Local', 'currentlog.txt')
+        log = get_file_contents(log_file_path)
+        if log is None:
+            return HttpResponse("Error: Unable to locate log file.")
+
+        random_q_file = "a test"  # Placeholder, you need to retrieve this value from the session
+
+        if random_q_file is None:
+            return HttpResponse("Error: Random question file not found in session.")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
+
+        with open(currentlog_path, 'r') as currentlog_file:
+            user_subdirectory = currentlog_file.read().strip()
+
+        # Set the paths for cline.txt and wline.txt
+        cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
+        wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
+
+        # Write to cline.txt if answer is correct
+        if answer == 'correct':
+            with open(cline_path, 'a') as cline_file:
+                cline_file.write(random_q_file + '\n')
+            return HttpResponse("Answer recorded as correct.")
+
+        # Write to wline.txt if answer is incorrect
+        elif answer == 'incorrect':
+            with open(wline_path, 'a') as wline_file:
+                wline_file.write(random_q_file + '\n')
+            return HttpResponse("Answer recorded as incorrect.")

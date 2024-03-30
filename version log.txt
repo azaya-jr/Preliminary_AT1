@@ -43,6 +43,9 @@ Deck will not create if a folder already exists
 Fixed creating deck bug in Builder (now void)
 1.2:
 In process of making sure no old data is written without giving a headsup
+1.3:
+History now logged
+Old data is now completely overwritten and History files are all flushed
 
 
 Coming features:

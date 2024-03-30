@@ -1,7 +1,5 @@
-# views.py
-
 from django.shortcuts import render
+from django.http import HttpResponse
 
 def index(request):
-    # Your logic for rendering the index page goes here
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'message': 'Hello, world!'})

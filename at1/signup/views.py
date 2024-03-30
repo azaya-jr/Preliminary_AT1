@@ -20,6 +20,12 @@ def signup(request):
             os.makedirs(os.path.join(user_folder_path, 'Private'))
             os.makedirs(os.path.join(user_folder_path, 'RecDeck'))
             # Create files inside the Private folder
+            with open(os.path.join(user_folder_path, 'History', 'history.txt'), 'w') as file:
+                file.write('')
+            with open(os.path.join(user_folder_path, 'History', 'cline.txt'), 'w') as cline_file:
+                cline_file.write('')
+            with open(os.path.join(user_folder_path, 'History', 'wline.txt'), 'w') as wline_file:
+                wline_file.write('')
             with open(os.path.join(user_folder_path, 'Private', 'ysr.txt'), 'w') as ysr_file:
                 ysr_file.write(username)
             with open(os.path.join(user_folder_path, 'Private', 'psd.txt'), 'w') as psd_file:

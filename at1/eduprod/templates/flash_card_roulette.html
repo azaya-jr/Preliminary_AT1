@@ -17,22 +17,39 @@
             <div id="buttons">
                 <button id="reveal-answer-btn">Reveal Answer</button>
                 <button id="next-question-btn" style="display: none;">Next Question</button>
+                <button id="correct-btn" style="display: none;"">I got this correct</button>
+                <button id="incorrect-btn" style="display: none;"">I got this incorrect</button>
+                
             </div>
             <div id="answer-section" style="display: none;">
                 <h2>Answer:</h2>
                 <p id="answer"></p>
             </div>
+
             
             <script>
                 document.getElementById("reveal-answer-btn").addEventListener("click", function() {
                     document.getElementById("answer").innerText = "{{ corresponding_file_content }}";
                     document.getElementById("answer-section").style.display = "block";
-                    document.getElementById("next-question-btn").style.display = "block"; // Show next question button
+                    // document.getElementById("next-question-btn").style.display = "block";
+                    document.getElementById("correct-btn").style.display = "block";
+                    document.getElementById("incorrect-btn").style.display = "block"; // Show next question button
                 });
             
                 document.getElementById("next-question-btn").addEventListener("click", function() {
                     // You can redirect to another URL or perform an AJAX request to fetch the next question
                     // For simplicity, let's just reload the page for now
+                    window.location.reload();
+                });
+                document.getElementById("correct-btn").addEventListener("click", function() {
+                    // Redirect to the view to handle the correct answer
+                    window.location.href = "{% url 'handle_answer' 'correct' %}";
+                    window.location.reload();
+                });
+            
+                document.getElementById("incorrect-btn").addEventListener("click", function() {
+                    // Redirect to the view to handle the incorrect answer
+                    window.location.href = "{% url 'handle_answer' 'incorrect' %}";
                     window.location.reload();
                 });
             </script>

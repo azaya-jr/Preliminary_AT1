@@ -24,7 +24,12 @@ Flash Card System.
 
 # Beta Version 1.2:
 
-Now identifies if two decks have the same name
+- Now identifies if two decks have the same name
+
+# Beta Version 1.3:
+
+- History is now logged under the user
+- History files now flushed when the deck is changed (or kept the same)
 
 ## Coming features:
 - Track Progress of different users/create a report
