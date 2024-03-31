@@ -4,6 +4,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import os
 from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.http import JsonResponse, HttpResponse
+import os
 
 #def generate_random_hex_string(length):
     #yes, it isnt hex, i know
@@ -47,6 +51,8 @@ def my_view(request):
 def delete_all_lines(file_path):
     with open(file_path, 'w') as file:
         file.truncate(0)
+        
+        
 def process_data(request):
     if request.method == 'POST':
         # Read the content of currentlog.txt
@@ -94,8 +100,7 @@ def process_data(request):
                 print("Deck created")
                 os.makedirs(os.path.join(recent_deck_content, 'Q'))
                 os.makedirs(os.path.join(recent_deck_content, 'A'))
-            
-            return JsonResponse({'recent_deck_content': recent_deck_content, 'show_modal': False})
+            return HttpResponse("Data processed successfully.")  # Return a success response
         else:
             return JsonResponse({'error': 'Name not provided.'}, status=400)
     else:
