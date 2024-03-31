@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
@@ -19,7 +19,7 @@ def history_view(request):
     currentlog_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt')
     history_directory = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_directory}/History/'))
     if not os.path.exists(history_directory):
-        return HttpResponse("Error: You are not logged in.")
+        return redirect("http://127.0.0.1:8000/login/")
     history_file_path = os.path.join(history_directory, 'history.txt')
     with open(history_file_path, 'r') as history_file:
         history_data = history_file.read()

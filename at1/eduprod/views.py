@@ -47,7 +47,7 @@ def my_view(request):
         return render(request, 'my_template.html', {'show_form': True, 'show_header': False})
     else:
         # Return an error message
-        return HttpResponse("Error: You are not logged in.")
+        return redirect("http://127.0.0.1:8000/login/")
 def delete_all_lines(file_path):
     with open(file_path, 'w') as file:
         file.truncate(0)
@@ -96,15 +96,17 @@ def process_data(request):
             # Create directories for Q and A
             if os.path.exists(recent_deck_content):            
                 print("Deck found")
+                os.makedirs(os.path.join(recent_deck_content, 'Q'))
+                os.makedirs(os.path.join(recent_deck_content, 'A'))
             else:
                 print("Deck created")
                 os.makedirs(os.path.join(recent_deck_content, 'Q'))
                 os.makedirs(os.path.join(recent_deck_content, 'A'))
             return HttpResponse("Data processed successfully.")  # Return a success response
         else:
-            return JsonResponse({'error': 'Name not provided.'}, status=400)
+            return redirect("http://127.0.0.1:8000/eduprod/")
     else:
-        return JsonResponse({'error': 'Method not allowed.'}, status=405)
+        return redirect("http://127.0.0.1:8000/eduprod/")
 
     
 

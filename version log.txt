@@ -49,9 +49,17 @@ Old data is now completely overwritten and History files are all flushed
 1.4:
 Can view most recent deck history in History
 (lists correct and incorrect questions and how many times each one was correct/incorrect)
-
-Coming features:
-Proper GUI
-Bug fixes
-Quality of life features
+1.5
+Full Version Released
+Home page Connecting all the flash card related apps together
+Flash card roulette that logs what you get correct, and what you get incorrect
+Deck editor letting you add questions and answers
+Tracking your progress/results
+Switching between decks or creating decks - also wipes your history clean
+Login system for multiple users
+Sign up system to create different users with unique names
+Help page to assist users having trouble
 Log out option
+Graphics overhaul
+Complete GUI with animations
+Page redirects if files missing

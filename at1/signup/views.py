@@ -37,6 +37,6 @@ def signup(request):
             open(os.path.join(user_folder_path, 'RecDeck', 'cq.txt'), 'a').close()
             # Create login.txt in the same directory as RecDeck, Pri    vate, and History
             messages.success(request, 'Folder created successfully.')
-            return redirect('signup')  # Adjust the URL name if necessary
+            return redirect("http://127.0.0.1:8000/login/")  # Adjust the URL name if necessary
     else:
         return render(request, 'signup.html')

@@ -1,3 +1,0 @@
-ysr.txt and login.txt are old concepts and aren't really needed
-(ysr invalid as it checks for folder names instead and login invalid due to new currentlong.txt system only allowing one user to be logged in at any one time)
-its just way too hard to recode everything to void these files

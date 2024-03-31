@@ -28,4 +28,6 @@ urlpatterns = [
     path('roulette/', views.flash_card_roulette, name='flash_card_roulette'),
     path('builder/', include('builder.urls')),
     path('history/', history_view, name='history'),
+    path('help/', include('help.urls')),
+    path('logout/', include('logout.urls')),
 ]

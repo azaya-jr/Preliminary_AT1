@@ -9,7 +9,7 @@
 <style>
     .title {
         margin-left: 100px; /* Align the title to the left */
-        margin-bottom: 500px; /* Adjust top margin as needed */
+        margin-bottom: 600px; /* Adjust top margin as needed */
         color: #f1f1f1;
         
     }
@@ -122,8 +122,6 @@
       }
 /* Cyberpunk Theme */
 .background {
-    width: 100%;
-    height: 100%;
     background-color: #f0f0f0; /* Change this to your desired background color */
     position: fixed;
     top: 0;
@@ -278,15 +276,15 @@ button:hover {
     z-index: 3;
 }
 .logo {
-    width:10%;
+    width:40%;
     z-index: 3;
 }
 .bgimg {
     position: fixed;
     top: -40%; /* Move the image up above the top */
-    left: 23%;
-    width: 100%;
-    height: 200%; /* Adjusted height to cover the entire viewport */
+    left: 30%;
+    width: 80%;
+    height: 160%; /* Adjusted height to cover the entire viewport */
     background-image: url('your-image-url.jpg'); /* Replace 'your-image-url.jpg' with the path to your image */
     background-size: cover;
     background-position: center top; /* Adjusted background-position */
@@ -295,19 +293,25 @@ button:hover {
 /* Smooth Fade-In Animation */
 </style>
 <body>
+    <img class="bgimg"src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/login.jpeg?raw=true" alt="Background Image">
     <div class="tbar">
         <a href="http://127.0.0.1:8000/hub/">Home</a>
         <a class="active" href="http://127.0.0.1:8000/login/">Login</a>
         <a href="http://127.0.0.1:8000/signup/">Sign Up</a>
-        <a href="http://127.0.0.1:8000/history/">Help</a>
-        <a href="http://127.0.0.1:8000/eduprod/">Log Out</a>
+        <a href="http://127.0.0.1:8000/help/">Help</a>
+        <a href="http://127.0.0.1:8000/logout/">Log Out</a>
     </div>
     <div class="rounded-square">
-        <h1 class="title">Login</h2>
+        <h1 class="title">Login</h1>
         <div class="content">
             <form id="data_form" method="post">
                 {% csrf_token %}
                 <div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required>
                 </div>
@@ -317,11 +321,9 @@ button:hover {
                     <div class="button-wrapper">
                         <br>
                         <button type="submit">Login</button>
-                        <br>
-                        <br>
                     </div>
-
             <!-- Content inside the rounded-square div -->
         </div>
+        <img class="logo" src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/logo.png?raw=true" alt="Flasher Logo" style="position: relative; left: 30%; top: 7%">
     </body>
     </html>
