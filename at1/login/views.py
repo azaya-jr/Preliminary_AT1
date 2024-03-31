@@ -1,6 +1,8 @@
 import os
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
+
 
 def login(request):
     if request.method == 'POST':
@@ -15,7 +17,7 @@ def login(request):
             if os.path.exists(password_file):
                 with open(password_file, 'r') as f:
                     stored_password = f.read().strip()
-                if password == stored_password:
+                if password == stored_password: 
                     # Write '0' to login.txt
                     login_flag_file = os.path.join(user_folder, 'Private', 'login.txt')
                     with open(login_flag_file, 'w') as f:
@@ -25,13 +27,13 @@ def login(request):
                     current_log_file = os.path.join('C:\\Users\\azaya\\Preliminary_AT1\\at1\\Local', 'currentlog.txt')
                     with open(current_log_file, 'w') as f:
                         f.write(username)
-                    
-                    return HttpResponse(f'Welcome, {username}!')
+                    return redirect("http://127.0.0.1:8000/hub/")
                 else:
-                    return HttpResponse('Error: Incorrect password!')
+                    return redirect("http://127.0.0.1:8000/login/")
+
             else:
-                return HttpResponse('Error: Password file not found!')
+                return redirect("http://127.0.0.1:8000/login/")
         else:
-            return HttpResponse('Error: Username not found!')
+            return redirect("http://127.0.0.1:8000/login/")
     else:
         return render(request, 'login.html')
