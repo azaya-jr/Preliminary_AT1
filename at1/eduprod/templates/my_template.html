@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Recent Deck</title>
+    <title>Change Deck Directory</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 </head>
 <style>
@@ -294,7 +294,7 @@ h1, h2 {
             {% csrf_token %}
             <br>
             <br>
-            <h1>Deck Deck Directory</h1>
+            <h1>Change Deck Directory</h1>
             <p for="name">Type in the location of the deck that you want to use<br>or type in a new directory that doesn't exist to create<br> a new deck! After typing in the location of your deck,<br> you can use this deck in the Roulette, Deck Editor,<br>or check your recent progress!<br>Warning: This will delete your current progress!</p>
             <label for="name">Enter Deck Location:</label>
             <input type="text" id="name" name="name" placeholder="Deck Location">
