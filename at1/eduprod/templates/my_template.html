@@ -8,13 +8,14 @@
 </head>
 <style>
     /* style.css */
+
     .content {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3; /* Set the z-index of the content to be above the square */
-        color: #000000; /* Text color for the content */
+        color: #f1f1f1; /* Text color for the content */
         font-size: 16px; /* Adjust font size as needed */
         text-align: center; /* Center align the content */
       }
@@ -71,10 +72,13 @@
     .rounded-square:hover, .rounded-square:not(:hover) {
     transition: all 0.3s ease; /* Add transition effect for both states */
 }
-  }
-
+  
+.rounded-square.clicked {
+    background-color: #f1f1f1; /* Change background color when clicked */
+}
 
 p {
+    color: #f1f1f1;
     z-index: 3;
 }
 .tbar {
@@ -125,6 +129,7 @@ p {
 
 /* Adjustments for Form Elements */
 label {
+    color: #f1f1f1;
     margin-bottom: 10px; /* Add some space below the label */
     z-index: 3;
 }
@@ -171,7 +176,7 @@ button:hover {
 }
 
 h1, h2 {
-    color: #4caf50; /* Neon green headers */
+    color: #f1f1f1; /* Neon green headers */
     z-index: 3;
 }
 
@@ -212,6 +217,7 @@ h1, h2 {
 
 
 
+
 /* Modal */
 .modal {
     display: none;
@@ -243,7 +249,9 @@ h1, h2 {
     font-weight: bold;
     z-index: 3;
 }
-
+.logo {
+    width: 25%;
+}
 .close:hover,
 .close:focus {
     color: #fff;
@@ -251,29 +259,50 @@ h1, h2 {
     cursor: pointer;
     z-index: 3;
 }
+.bgimg {
+    position: fixed;
+    top: -40%; /* Move the image up above the top */
+    left: 0;
+    width: 100%;
+    height: 200%; /* Adjusted height to cover the entire viewport */
+    background-image: url('your-image-url.jpg'); /* Replace 'your-image-url.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center top; /* Adjusted background-position */
+    z-index: 2; /* Set z-index higher to move the image higher */
+  }
 </style>
+<script>
+    function showPopup() {
+        alert("Deck changed. History deleted.");
+    }
+</script>
 <body>
+    <img class="bgimg"src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/eduprodbg.png?raw=true" alt="Background Image">
     <div class="tbar">
         <a href="http://127.0.0.1:8000/hub/">Home</a>
         <a href="http://127.0.0.1:8000/roulette/">Roulette</a>
         <a href="http://127.0.0.1:8000/builder/create_deck/">Deck Editor</a>
         <a href="http://127.0.0.1:8000/history/">My Progress</a>
         <a class="active" href="http://127.0.0.1:8000/eduprod/">Change Deck Directory</a>
-        <a href="http://127.0.0.1:8000/login/">Login</a>
+        <a href="http://127.0.0.1:8000/login/">My Account</a>
       </div>
       <div class="rounded-square">
     {% block body %}
         {% if show_form %}
         <form id="data_form">
             {% csrf_token %}
+            <br>
+            <br>
             <h1>Deck Deck Directory</h1>
-            <p for="name">Type in the location of the deck that you want to use<br>or type in a new directory that doesn't exist to create<br> a new deck! After typing in the location of your deck,<br> you can use this deck in the Roulette,<br>Deck Editor, or check your recent progress!</p>
+            <p for="name">Type in the location of the deck that you want to use<br>or type in a new directory that doesn't exist to create<br> a new deck! After typing in the location of your deck,<br> you can use this deck in the Roulette, Deck Editor,<br>or check your recent progress!<br>Warning: This will delete your current progress!</p>
             <label for="name">Enter Deck Location:</label>
             <input type="text" id="name" name="name" placeholder="Deck Location">
-            <button type="submit">Submit</button>
-            <img src="Untitled.png" alt="Background Image">
-            
+            <button type="submit" onclick="showPopup()">Submit</button>
+            <img class="logo" src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/logo.png?raw=true" alt="Flasher Logo" style="position: relative; left: 13%; top: 7%">
+
+
         </form>
+        
         {% endif %}
 
         {% if show_header %}
@@ -297,6 +326,7 @@ h1, h2 {
             <button id="noButton">No</button>
         {% endif %}
     {% endblock %}
+    
     <script>
         // Handle form submission using AJAX
         $('#data_form').submit(function(event) {
@@ -535,7 +565,9 @@ h1, h2 {
                     console.log(xhr.status + ": " + errmsg);
                 }
             });
+
         </script>
         
+
     </body>
     </html>

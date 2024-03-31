@@ -5,23 +5,276 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
 </head>
-<body>
-    <h1>History</h1>
-    <h2>Deck Location:</h2>
-    <p>{{ history_data }}</p>
+<style>
+    /* Smooth Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
-    <h2>Questions You Got Correct</h2>
-    <ul>
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+    /* style.css */
+
+    
+    /* Adjusted z-index for other elements */
+    p, h1, h2, ul {
+        position: relative;
+        z-index: 3; /* Ensure text is above the square */
+        margin-left: 5%;
+        margin-right:
+        margin-top: 20%;
+        color: #f1f1f1;
+        max-width: 30%;
+        word-wrap: break-word; /* Break the text to a new line if it exceeds 50% of the page */
+
+    }
+    .content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4; /* Adjusted the z-index to be higher than the square */
+        color: #f1f1f1; /* Text color for the content */
+        font-size: 16px; /* Adjust font size as needed */
+        text-align: center; /* Center align the content */
+      }
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        z-index: 3;
+      }
+      button:hover {
+        background-color: #6e7ff0; /* Darker Green */
+        z-index: 3;
+      }
+/* Cyberpunk Theme */
+.background {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0; /* Change this to your desired background color */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure this is below the z-index of the square */
+  }
+  
+  .rounded-square {
+    width: calc(80vw - 400px);
+    height: 100vh; /* Change height to 100vh to cover the entire viewport height */
+    background-color: #454545; /* Change this to your desired square color */
+    border-radius: 60px; /* Adjust the border-radius to control the roundness */
+    position: fixed;
+    top: 0; /* Position at the top of the viewport */
+    left: 17%; /* Adjust left value to center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 1; /* Ensure this is above the z-index of the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .rounded-square:hover {
+    width: calc(90vw - 400px); /* Adjust the width to stretch to the right by 10px */
+    background-color: #2b2b2b; /* Darken the color on hover */
+    transition: all 0.3s ease; /* Add transition effect for color change */
+  }
+    .rounded-square:hover, .rounded-square:not(:hover) {
+    transition: all 0.3s ease; /* Add transition effect for both states */
+}
+  
+.rounded-square.clicked {
+    background-color: #f1f1f1; /* Change background color when clicked */
+}
+
+p {
+    color: #f1f1f1;
+    z-index: 4; /* Adjusted the z-index to be higher than the square */
+}
+.tbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    font-size: 30px;
+    overflow: hidden;
+    background-color: #333;
+    z-index: 4;
+}
+
+.tbar a {
+    position: -webkit-sticky;
+    position: sticky;
+    float: left;
+    color: #f1f1f1;
+    text-align: center;
+    padding: 18px 23px;
+    text-decoration: none;
+    font-size: 20px;
+    z-index: 4;
+    
+  }
+  
+  .tbar a:hover {
+    background-color: #6e7ff0;
+    color: black;
+    animation: fadeIn 1s ease forwards;
+    z-index: 4;
+  }
+  
+  .tbar a.active {
+    background-color: #475ad6;
+    color: white;
+    animation: fadeIn 1s ease forwards;
+    z-index: 4;
+  }
+#data_form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */ /* Remove this line */
+    justify-content: center;
+    height: 100vh; /* Stretch the form to fill the viewport height */
+    margin: -100px 0 0 100px; /* Adjusted margin: 20px from the top, 20px from the left, 0 from the right, and 0 from the bottom */
+    z-index: 3;
+}
+
+/* Adjustments for Form Elements */
+label {
+    color: #f1f1f1;
+    margin-bottom: 10px; /* Add some space below the label */
+    z-index: 3;
+}
+
+input[type="text"],
+button {
+    width: 100%; /* Make the input fields and buttons stretch to fill the container */
+    max-width: 300px; /* Limit the maximum width */
+    z-index: 3;
+}
+body {
+    background-color: #d6d2d2
+    color: #ffffff; /* White text */
+    font-size: 25px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    z-index: 3;
+}
+
+input[type="text"],
+button {
+    background-color: #d6d2d2; /* Dark input fields and buttons */
+    font: bold;
+    font-size: 20px;
+    color: #1f1f1f; /* White text */
+    border: outset;
+    border-color: #1f1f1f;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    z-index: 3;
+}
+
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 3;
+}
+
+button:hover {
+    background-color: #6e7ff0
+    z-index: 3;
+}
+
+h1, h2 {
+    color: #f1f1f1; /* Neon green headers */
+    z-index: 3;
+}
+
+#question_content {
+    display: none; /* Hide initially */
+    z-index: 3;
+}
+
+#reveal_answer {
+    background-color: #ff4081; /* Neon pink button */
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 3;
+}
+
+#reveal_answer:hover {
+    background-color: #d81b60; /* Darker pink glow on hover */
+    z-index: 3;
+}
+.logo {
+    width:10%;
+    z-index: 3;
+}
+.bgimg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Set height to 100vh to cover the entire viewport */
+    background-image: url('your-image-url.jpg'); /* Replace 'your-image-url.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center top; /* Adjusted background-position */
+    z-index: 1; /* Set z-index higher to move the image higher */
+}
+/* Smooth Fade-In Animation */
+</style>
+<body>
+    <img class="bgimg"src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/eduprodbg.png?raw=true" alt="Background Image">
+    
+    <div class="tbar">
+        <a href="http://127.0.0.1:8000/hub/">Home</a>
+        <a href="http://127.0.0.1:8000/roulette/">Roulette</a>
+        <a href="http://127.0.0.1:8000/builder/create_deck/">Deck Editor</a>
+        <a class="active" href="http://127.0.0.1:8000/history/">My Progress</a>
+        <a href="http://127.0.0.1:8000/eduprod/">Change Deck Directory</a>
+        <a href="http://127.0.0.1:8000/login/">My Account</a>
+      </div>
+    <br>
+    <br>  
+    <h1 class="cont">My Progress</h1>
+    <h2 class="cont">Current Deck:</h2>
+    <p class="cont">{{ history_data }}</p>
+
+    <h2 class="cont">Questions You Got Correct:</h2>
+    <ul class="cont">
         {% for string, count in cline_counts.items %}
         <li>{{ string }} - {{ count }}</li>
         {% endfor %}
     </ul>
 
-    <h2>Questions You Got Incorrect</h2>
-    <ul>
+    <h2 class="cont">Questions You Got Incorrect:</h2>
+    <ul class="cont">
         {% for string, count in wline_counts.items %}
         <li>{{ string }} - {{ count }}</li>
         {% endfor %}
     </ul>
+    <br>
+    <img class="logo" src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/logo.png?raw=true" alt="Flasher Logo" style="position: relative; left: 20%; top: 7%">
+    <br>
+    <br>
+
+    <div class="rounded-square">
 </body>
 </html>
