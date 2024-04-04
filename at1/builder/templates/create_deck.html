@@ -301,6 +301,7 @@ button:hover {
 /* Smooth Fade-In Animation */
 </style>
 <body>
+    <!-- other page links -->
     <img class="bgimg"src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/const.jpeg?raw=true" alt="Background Image">
     <div class="tbar">
         <a href="http://127.0.0.1:8000/hub/">Home</a>
@@ -310,12 +311,15 @@ button:hover {
         <a href="http://127.0.0.1:8000/eduprod/">Change Deck Directory</a>
         <a href="http://127.0.0.1:8000/login/">My Account</a>
       </div>
+      <!-- logo -->
       <img class="logo" src="https://github.com/azaya-jr/Preliminary_AT1/blob/main/at1/images/logo.png?raw=true" alt="Flasher Logo" style="left: 14%; top: 65%">
+      <!-- background square -->
     <div class="rounded-square">
         <h1 class="title">Add Question to Deck</h1>
         <div class="content">
             <form id="data_form" method="post">
                 {% csrf_token %}
+                <!-- Question and Answer form -->
                 {{ question_form.as_p }}
                 {{ answer_form.as_p }}
 

@@ -33,6 +33,7 @@ def flash_card_roulette(request):
         return redirect("http://127.0.0.1:8000/login/")
     with open(currentlog_path, 'r') as currentlog_file:
         user_subdirectory = currentlog_file.read().strip()
+        #define paths
     lpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/history.txt'))
     dpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/RecentDeck.txt'))
     cqpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/cq.txt'))

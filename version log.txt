@@ -65,3 +65,5 @@ Complete GUI with animations
 Page redirects if files missing
 1.6:
 Minor css fixes
+1.7:
+Comments addded

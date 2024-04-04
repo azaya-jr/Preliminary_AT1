@@ -46,13 +46,13 @@ def my_view(request):
         # Render the template with the form
         return render(request, 'my_template.html', {'show_form': True, 'show_header': False})
     else:
-        # Return an error message
+        # Return to login
         return redirect("http://127.0.0.1:8000/login/")
 def delete_all_lines(file_path):
     with open(file_path, 'w') as file:
         file.truncate(0)
         
-        
+        #for checking if answer is correct or incorrect
 def process_data(request):
     if request.method == 'POST':
         # Read the content of currentlog.txt
@@ -89,6 +89,7 @@ def process_data(request):
             else:
                 with open(md_file_path, 'w') as file:
                     file.write(recent_deck_content)
+                    #check correct and incorrect lists
             cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
             wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
             delete_all_lines(cline_path)
@@ -154,7 +155,7 @@ def handle_answer(request, answer):
         cqpath = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/cq.txt'))
         cline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/cline.txt'))
         wline_path = os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History/wline.txt'))
-
+#open placeholder txt to dsvr current question
         with open(cqpath, 'r') as file:
             random_q_file = file.read().strip()
 

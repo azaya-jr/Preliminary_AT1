@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import NameForm, AuthorForm, QuestionForm, AnswerForm
 
+# defining directories. My_Decks invalid
 BASE_DIR = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 USER_DECKS_DIR = str(os.path.join(BASE_DIR, 'Local', 'My_Decks'))
 
@@ -10,6 +11,8 @@ USER_DECKS_DIR = str(os.path.join(BASE_DIR, 'Local', 'My_Decks'))
 if not os.path.exists(USER_DECKS_DIR):
     os.makedirs(USER_DECKS_DIR)
 
+
+#making the Q and A folders (unused)
 def create_deck_folder(name):
     deck_path = str(os.path.join(USER_DECKS_DIR, name))
     os.makedirs(deck_path)
@@ -18,13 +21,16 @@ def create_deck_folder(name):
 
 def save_question_and_answer(name, question, answer):
     current_directory = str(os.path.dirname(os.path.abspath(__file__)))
+    #finding user currently logged in
     currentlog_path = str(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt'))
     if currentlog_path is None:
+        #error redirections
         return redirect("http://127.0.0.1:8000/login/")
     if current_directory is None:
         return redirect("http://127.0.0.1:8000/signup/")
     with open(currentlog_path, 'r') as currentlog_file:
         user_subdirectory = str(currentlog_file.read().strip())
+        #checking user's deck directory
     lpath = str(os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/History')))
     dpath = str(os.path.normpath(os.path.join(current_directory, f'../../Local/{user_subdirectory}/RecDeck/RecentDeck.txt')))
     if not os.path.exists(dpath):
@@ -33,11 +39,13 @@ def save_question_and_answer(name, question, answer):
         directory_name = str(file.read().strip())
     print("directory_name:", directory_name) 
     cpath = str(os.path.join(os.path.dirname(__file__), '..', 'Local', directory_name)) 
-    print("dpath:", dpath)  # Add print statement to check dpath
+    print("dpath:", dpath) 
     deck_path = str(os.path.join(USER_DECKS_DIR, name))
+    #find Q and A folder
     q_folder = str(os.path.join(cpath, 'Q'))
     a_folder = str(os.path.join(cpath, 'A'))
     num_questions = len(os.listdir(q_folder))
+    #taking the number of questions in that folder and adding 1 to get the new file name for this question
     question_file = str(os.path.join(q_folder, f'{num_questions + 1}.txt'))
     answer_file = str(os.path.join(a_folder, f'{num_questions + 1}.txt'))
     with open(question_file, 'w') as q_file:
@@ -45,6 +53,7 @@ def save_question_and_answer(name, question, answer):
     with open(answer_file, 'w') as a_file:
         a_file.write(str(answer))
 
+#invalid
 def create_deck(request):
     current_directory = str(os.path.dirname(os.path.abspath(__file__)))
     currentlog_path = str(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'Local', 'currentlog.txt'))

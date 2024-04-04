@@ -24,12 +24,12 @@ def history_view(request):
     with open(history_file_path, 'r') as history_file:
         history_data = history_file.read()
 
-    # Read cline.txt
+    # Read cline.txt A(correct list)
     cline_file_path = os.path.join(history_directory, 'cline.txt')
     with open(cline_file_path, 'r') as cline_file:
         cline_data = cline_file.read().splitlines()
 
-    # Read wline.txt
+    # Read wline.txt (incorrect list)
     wline_file_path = os.path.join(history_directory, 'wline.txt')
     with open(wline_file_path, 'r') as wline_file:
         wline_data = wline_file.read().splitlines()

@@ -5,6 +5,13 @@ Flash Card System.
 1. Run python manage.py runserver in the at1 directory
 2. Go to http://127.0.0.1:8000/hub/
 
+## Version 1.7:
+
+- More comments in code
+
+## Version 1.8
+
+- Minor CSS Fixes
 
 ## Full Release - Version 1.5:
 
